@@ -20,3 +20,10 @@ class Prestable(ABC):
     @abstractmethod
     def is_disponible_particular(self):
         pass
+        @abstractmethod
+    def is_disponible_particular3(self):
+        pass
+    
+    @abstractmethod
+    def is_disponible_particular5(self):
+        pass
