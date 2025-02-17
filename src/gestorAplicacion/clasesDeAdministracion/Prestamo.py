@@ -61,10 +61,7 @@ class Prestamo:
         return all(copia in self.copias_prestadas for copia in copias) and all(pc in self.pcs_prestados for pc in pcs)
 
     def finalizar_prestamo(self):
-        # Lógica para finalizar el préstamo (puedes implementar esta lógica)
-        # Esto podría incluir la actualización de la disponibilidad de las copias y las PCs prestadas
         pass
 
     def generar_identificador_unico(self):
-        # Implementa la lógica para generar identificadores únicos de préstamo
-        return 0  # Debes ajustar esto según tu implementación
+        return 0  
