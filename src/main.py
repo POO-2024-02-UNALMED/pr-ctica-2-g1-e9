@@ -162,3 +162,234 @@ class ventanaInicial(Tk):
         menu1.add_command(label="Salir",command=salirSerializar)
 
         self.mainloop()
+
+class ventPrincipal(Tk):
+      def __init__(self,sistema):
+            super().__init__()
+            self.title("Sistema de Gestión de Bibliotecas")
+            self.geometry("1250x800")
+            self.configure(background="#72b2f4")
+            self.iconbitmap("img\\R.ico")
+
+            def Volver():
+                self.destroy()
+                ventanaInicial(sistema)
+
+            def kill(root):
+                for widget in root.winfo_children():
+                        if isinstance(widget, Frame):
+                            widget.destroy()
+
+            def prestamoDeRecursos():
+                kill(self)
+                p = PrestamoRecursos(self, sistema)
+                p.grid(row=0, column=0, rowspan=2)
+                p.place(relx=0.5,rely=0.5,anchor="center")
+
+            def ReservaDeEvento():
+                kill(self)
+                p = ReservaEvento(self,sistema)
+                p.grid(row=0, column=0, rowspan=2)
+                p.place(relx=0.5,rely=0.5,anchor="center")
+
+            def BaseDatos():
+                kill(self)
+                p = BaseDeDatos(self,sistema)
+                p.grid(row=0, column=0, rowspan=2)
+                p.place(relx=0.5,rely=0.5,anchor="center")
+
+            def gestionPrestamos():
+                kill(self)
+                p = GestionPrestamo(self, sistema)
+                p.grid(row=0, column=0,rowspan=2)
+                p.place(relx=0.5,rely=0.5,anchor="center")
+
+            def gestionarMultas():
+                kill(self)
+                p = GestionMultas(self, sistema)
+                p.grid(row=0, column=0, rowspan=2)
+                p.place(relx=0.5,rely=0.5,anchor="center")
+
+            def Funny():
+                respuesta = False
+                while(respuesta != True):
+                    respuesta = messagebox.askyesno("Profesores Jaime y David", "¿Paulina, Daniel, Valentina, Alejandro y Leonardo se merecen un 5.0 por este trabajo?")
+                messagebox.showwarning("Cuidado!","Lo tendremos en cuenta!")
+
+            frame = Frame(self, bg="#72b2f4")
+            frame.pack(padx=10,pady=10)
+
+            bienvenida = Label(frame, text="¡Bienvenido al sistema de bibliotecas de la Universidad Nacional de Colombia!", bg= "#2b6fb8", fg= "white", font=("arial", 15, "bold"))
+            bienvenida.pack(anchor="center")
+            img = PhotoImage(file="img\\logo.png")
+            contenedorImg = Label(frame, image = img, bg = "#72b2f4")
+            contenedorImg.pack(anchor="center", pady=(27,20))
+            texto = "El sistema de bibliotecas de la universidad ofrece las siguientes cinco funcionalidades: \n1. Reserva de Recurso: Esta función permite a los usuarios reservar recursos disponibles \nen la biblioteca, como libros, revistas y documentos electrónicos. \n\n2. Reserva para Evento: Los usuarios pueden reservar espacios dentro de la biblioteca para \neventos como reuniones de estudio, presentaciones y conferencias. \n\n3. Gestión de Base de Datos: Esta funcionalidad permite a los administradores de la \nbiblioteca gestionar la base de datos de la biblioteca, incluyendo la adición, eliminación \ny modificación de registros de recursos. \n\n4. Gestión de Préstamos: Esta función permite a los usuarios solicitar préstamos de recursos \nde la biblioteca y a los administradores gestionar estos préstamos, incluyendo la emisión, \nrenovación y devolución de recursos. \n\n5. Gestión de Multas: Esta funcionalidad permite a los administradores de la biblioteca emitir \ny gestionar multas por retrasos en la devolución de recursos prestados. Estas funcionalidades \nhacen que el sistema de bibliotecas de la universidad sea eficiente y fácil de usar para todos \nlos usuarios."
+
+            descripcion = Label(frame, text=texto, bg="#2b6fb8", fg = "white", font=("arial", 11, "bold"),justify="left", padx= 20, pady=20)
+            descripcion.pack(padx=25,pady=10, expand=False)
+
+            menuBar2 = Menu(self)
+            self.option_add("*tearOff",  False)
+            self.config(menu=menuBar2)
+            menu2= Menu(menuBar2)
+
+            menuBar2.add_cascade(label="Archivo",menu=menu2)
+            menu2.add_command(label="Aplicacion",command=lambda: messagebox.showinfo("Aplicacion","Este sistema permite el control y administracion de la base de datos del sistema de bibliotecas de la Universidad Nacional. En este sistema encontraras funcionalidades para el prestamo de material de la biblioteca, para agregar/eliminar material y para gestionar tus reservas/multas."))
+            menu2.add_command(label="Salir",command=lambda:Volver())
+
+            menu3 = Menu(menuBar2)
+            menuBar2.add_cascade(label="Procesos y Consultas",menu=menu3)
+            menu3.add_command(label="Préstamo de Recursos",command= prestamoDeRecursos)
+            menu3.add_command(label="Reserva de Recursos para Eventos",command= ReservaDeEvento)
+            menu3.add_command(label="Gestión Base de Datos",command= BaseDatos)
+            menu3.add_command(label="Gestión de Prestamos y Reservas",command= gestionPrestamos)
+            menu3.add_command(label="Gestión de Multas",command=gestionarMultas)
+            
+            menu4 = Menu(menuBar2)
+            menuBar2.add_cascade(label="Ayuda",menu=menu4)
+            menu4.add_command(label="Acerca de",command=lambda: Funny())
+
+            self.mainloop()
+  
+if __name__ == "__main__":
+    sistema = Sistema()
+    Deserializador.deserializar(sistema)
+    #app = Aplicacion(sistema)
+    """
+    autor1 = Autor("Yuval Noah Harari", "Israel", "Historia")
+    autor2 = Autor("J.K. Rowling", "Reino Unido", "Fantasía")
+    autor3 = Autor("Harper Lee", "Estados Unidos", "Ficción")
+    autor4 = Autor("José Saramago", "Portugal", "Realismo mágico")
+    autor5 = Autor("Rebecca Solnit", "Estados Unidos", "Ensayo")
+    autor6 = Autor("Miguel de Cervantes", "España", "Ficción")
+    autor7 = Autor("Orson Scott Card", "Estados Unidos", "Ciencia ficción")
+    autor8 = Autor("Julio Cortázar", "Argentina", "Ficción")
+    autor9 = Autor("F. Scott Fitzgerald", "Estados Unidos", "Ficción")
+    autor10 = Autor("Yuval Noah Harari", "Israel", "Ensayo")
+    autor11 = Autor("Gabriel García Márquez", "Colombia", "Realismo mágico")
+    autor12 = Autor("George Orwell", "Reino Unido", "Distopía")
+
+    autores = [autor1, autor2, autor3, autor4, autor5, autor6, autor7, autor8, autor9, autor10, autor11, autor12]
+
+    libros = [
+        Libro("Sapiens: De animales a dioses", 1, "978-0-307-58973-2", autor1, 2014),
+        Libro("Harry Potter y la piedra filosofal", 2, "978-0-7475-3269-6", autor2, 1997),
+        Libro("Cien años de soledad", 3, "978-84-204-3471-6", autor11, 1967),
+        Libro("1984", 4, "978-3-16-148410-0", autor12, 1949),
+        Libro("Matar a un ruiseñor", 5, "978-0-553-21311-6", autor3, 1960),
+        Libro("Ensayo sobre la ceguera", 6, "978-1-84749-593-7", autor4, 1995),
+        Libro("Los hombres me explican cosas", 7, "978-1-933633-92-9", autor5, 2014),
+        Libro("Don Quijote de la Mancha", 8, "978-84-204-9184-8", autor6, 1605),
+        Libro("El juego de ender", 9, "978-0-06-112008-4", autor7, 1985),
+        Libro("Crónica de una muerte anunciada", 10, "978-84-339-7049-4", autor11, 1981),
+        Libro("Rayuela", 11, "978-84-3760494-7", autor8, 1963),
+        Libro("El gran Gatsby", 12, "978-0-8129-7449-8", autor9, 1925),
+        Libro("El amor en los tiempos del cólera", 13, "978-84-204-5298-7", autor11, 1985),
+        Libro("To Kill a Mockingbird", 14, "978-0-525-43396-9", autor3, 1960),
+    ]
+
+    computadores = [
+        Computador("Samsung JX", 0, "Samsung", "Alta"),
+        Computador("HP Pavilion", 1, "HP", "Media"),
+        Computador("Dell Inspiron", 2, "Dell", "Baja"),
+        Computador("Lenovo ThinkPad", 3, "Lenovo", "Alta"),
+        Computador("Asus VivoBook", 4, "Asus", "Media"),
+        Computador("Acer Aspire", 5, "Acer", "Baja"),
+    ]
+
+    bibliotecas = [
+        BibliotecaDos("Efe Gomez", "Medellín"),
+        BibliotecaDos("Gabriel Garcia Marquez", "Bogota")
+    ]
+
+    librosSedeMedellin = [libros[0],libros[1],libros[2],libros[3],libros[4],libros[7],libros[10],libros[13]]
+    bibliotecas[0].set_libros(librosSedeMedellin)
+
+    librosSedeBogota = [libros[0],libros[1],libros[2],libros[5],libros[6],libros[7],libros[10],libros[11], libros[12], libros[13]]
+    bibliotecas[1].set_libros(librosSedeBogota)
+
+    computadoresSedeMedellin = [computadores[0], computadores[1], computadores[2], computadores[3]]
+    bibliotecas[0].set_computadores(computadoresSedeMedellin)
+
+    computadoresSedeBogota = [computadores[0], computadores[1], computadores[2], computadores[3], computadores[5]]
+    bibliotecas[1].set_computadores(computadoresSedeBogota)
+
+
+    bibliotecas[0].añadir_sala(Sala(bibliotecas[0], "Auditorio 1", 30))
+    bibliotecas[0].añadir_sala(Sala(bibliotecas[0], "Auditorio 2", 50))
+    bibliotecas[0].añadir_sala(Sala(bibliotecas[0], "Auditorio 3", 10))
+    bibliotecas[1].añadir_sala(Sala(bibliotecas[1], "Auditorio 4", 150))
+    bibliotecas[1].añadir_sala(Sala(bibliotecas[1], "Auditorio 5", 30))
+    bibliotecas[1].añadir_sala(Sala(bibliotecas[1], "Auditorio 6", 60))
+
+
+    # Copias sede Medellin
+    bibliotecas[0].añadir_copia(Copia(0, libros[0], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(1, libros[0], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(2, libros[1], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(3, libros[2], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(4, libros[3], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(5, libros[3], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(6, libros[4], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(7, libros[7], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(8, libros[10], bibliotecas[0]))
+    bibliotecas[0].añadir_copia(Copia(9, libros[13], bibliotecas[0]))
+
+    #Copias sede Bogota
+    bibliotecas[1].añadir_copia(Copia(0, libros[0], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(1, libros[1], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(2, libros[2], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(3, libros[5], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(4, libros[6], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(5, libros[7], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(6, libros[7], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(7, libros[10], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(8, libros[11], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(9, libros[11], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(10, libros[12], bibliotecas[1]))
+    bibliotecas[1].añadir_copia(Copia(11, libros[13], bibliotecas[1]))
+
+    #PCs a sede Medellin
+    bibliotecas[0].añadir_pc(PC(computadores[0], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[0], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[0], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[1], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[1], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[1], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[2], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[2], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[3], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[3], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[3], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[3], True, bibliotecas[0]))
+    bibliotecas[0].añadir_pc(PC(computadores[3], True, bibliotecas[0]))
+
+    #Pcs a sede Bogota
+
+    bibliotecas[1].añadir_pc(PC(computadores[0], True, bibliotecas[1]))
+    bibliotecas[1].añadir_pc(PC(computadores[1], True, bibliotecas[1]))
+    bibliotecas[1].añadir_pc(PC(computadores[2], True, bibliotecas[1]))
+    bibliotecas[1].añadir_pc(PC(computadores[2], True, bibliotecas[1]))
+    bibliotecas[1].añadir_pc(PC(computadores[3], True, bibliotecas[1]))
+    bibliotecas[1].añadir_pc(PC(computadores[3], True, bibliotecas[1]))
+    bibliotecas[1].añadir_pc(PC(computadores[5], True, bibliotecas[1]))
+    bibliotecas[1].añadir_pc(PC(computadores[5], True, bibliotecas[1]))
+
+    user = Usuario()
+    user.get_prestamos().append(Prestamo(user, Copia(12, libros[2], bibliotecas[1]), "Particular", date.today(), date(2023, 12, 31), bibliotecas[1]))
+    user.get_prestamos().append(Prestamo(user, PC(computadores[2], True, bibliotecas[1]), "Particular", date.today(), date(2023, 12, 31), bibliotecas[0]))
+
+    user.get_multas().append(Multa("Retraso", date.today(), user, 3000))
+    user.get_multas().append(Multa("Uso indebido", date.today(), user, 10000))
+
+    sistema.set_autores(autores)
+    sistema.set_bibliotecas(bibliotecas)
+    sistema.set_computadores(computadores)
+    sistema.set_libros(libros)
+    sistema.set_user(user)
+
+    
+    Serializador.serializar(sistema)
+    """
+    ventanaInicial(sistema)
