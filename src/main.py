@@ -84,6 +84,19 @@ class ventanaInicial(Tk):
         ImagenSistema = Label(frameP4, image= imagenes[0],width=420,height=420,wraplength=160,highlightbackground="#2b6fb8",highlightthickness=4, bg = "#72b2f4")
         ImagenSistema.pack(side="top",pady=0)
 
+        self.im_actual = 0
+
+        def cambiarImagenesOG(evento):
+            global im_actual
+            if self.im_actual < 4:
+                self.im_actual = self.im_actual+1
+            else:
+                self.im_actual = 0
+
+            ImagenSistema.config(image=imagenes[self.im_actual])
+
+        ImagenSistema.bind("<Enter>", cambiarImagenesOG)
+
         def Ingresar(self):
             self.destroy()
             ventPrincipal(sistema)
