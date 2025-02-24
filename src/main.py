@@ -92,11 +92,11 @@ class ventanaInicial(Tk):
         botonIngreso.pack(side="top",pady=(10,20))
 
         biografias = [
-                        "Biografia de Cat1",
-                        "Biografia de Dog1",
-                        "Biografia de Fox1",
-                        "Biografia de Ferret1",
-                        "Biografia de Bunny1"]
+                        "Me llamo Paulina Gómez Hincapié, tengo 21 años y soy estudiante de traslado a Ingeniería de Sistemas",
+                        "Soy Daniel Hincapié Cardona, soy parte del programa de Ciencias de la Computacion y soy integrante del grupo cultural Coro UNAL. Entre mis hobbies está todo lo relacionado con computadores, videojuegos, música y astronomía.",
+                        "Mi nombre es Valentina Sierra soy estudiante del pregrado de estadística me apasiona conocer pueblos y paisajes vivo con mis padres y dos hermosos cachorros entre mis personajes favoritos está Stitch que me gusta mucho su historia y sus películas incluso tengo un tatuaje sobre él y lo que representa.",
+                        "Me llamo Alejandro Avendaño Serna, estudio ingeniería de sistemas e informática, me apasionan muchas cosas como el automovilismo, la tecnología y los videojuegos.",
+                        "Mi nombre es Juan Leonardo Medina Reyes, estudio Ingeniería de Sistemas e informática y me gusta experimentar con Machine Learning"]
 
         presentacion = Label(frameP5, text = biografias[0], font=("arial", 13, "bold"), bg="#2b6fb8", wraplength = 500, fg="#cedae0", width= 50)
         presentacion.pack(expand = True)
