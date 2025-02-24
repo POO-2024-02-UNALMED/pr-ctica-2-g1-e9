@@ -54,4 +54,3 @@ class PrestamoDeRecursos(Frame):
         porCriterio = Button(frame3, text= "Busqueda por criterios")
         basica.grid(row=0,column=0, padx=100, pady=15)
         porCriterio.grid(row=0,column=1,padx=100, pady=15)
-      
