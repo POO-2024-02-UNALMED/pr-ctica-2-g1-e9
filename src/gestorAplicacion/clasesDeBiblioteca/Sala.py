@@ -1,3 +1,5 @@
+from .Biblioteca import Biblioteca
+
 class Sala:
     def __init__(self, biblioteca, nombre, capacidad):
         self.biblioteca = biblioteca
