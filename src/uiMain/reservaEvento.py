@@ -511,7 +511,7 @@ class BusquedaPorLista(Frame):
         except ValueError:
             messagebox.showerror("Error", DatoIncorrecto("Numero").getError())
         except NoHayCopia:
-            messagebox.showerror("Error", NoHayPC(self.libroSel.get_nombre()).getError())
+            messagebox.showerror("Error", NoHayCopia(self.libroSel.get_nombre()).getError())
 
 
             
